@@ -1,6 +1,6 @@
 
 import React, { useState, useEffect, useCallback } from 'react';
-import { MIN_YEAR, MAX_YEAR, POPULAR_SITES } from './constants';
+import { MIN_YEAR, MAX_YEAR, POPULAR_SITES, ALL_POPULAR_SITES } from './constants';
 import { getWaybackUrl, validateUrl } from './services/waybackService';
 import Timeline from './components/Timeline';
 import SiteSelector from './components/SiteSelector';
@@ -85,6 +85,18 @@ const App: React.FC = () => {
     updateView(newUrl, year);
   };
 
+  const handleRandomSite = useCallback(() => {
+    const randomIndex = Math.floor(Math.random() * ALL_POPULAR_SITES.length);
+    const randomSite = ALL_POPULAR_SITES[randomIndex];
+    
+    const randomYear = Math.floor(Math.random() * (MAX_YEAR - MIN_YEAR + 1)) + MIN_YEAR;
+
+    // Ensure the random year is not before the site's start year
+    const targetYear = randomYear < randomSite.startYear ? randomSite.startYear : randomYear;
+
+    updateView(randomSite.url, targetYear);
+  }, [updateView]);
+
   const toggleTheme = () => {
     setTheme(prev => prev === 'light' ? 'dark' : 'light');
   };
@@ -116,6 +128,7 @@ const App: React.FC = () => {
                 sites={POPULAR_SITES} 
                 currentUrl={url} 
                 onSelect={handleSiteSelect}
+                onRandomSelect={handleRandomSite} // Pass the new handler
                 theme={theme}
               />
             </div>

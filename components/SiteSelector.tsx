@@ -7,9 +7,10 @@ interface SiteSelectorProps {
   currentUrl: string;
   theme: 'light' | 'dark';
   onSelect: (url: string, startYear: number) => void;
+  onRandomSelect: () => void; // New prop for random site selection
 }
 
-const SiteSelector: React.FC<SiteSelectorProps> = ({ sites, currentUrl, theme, onSelect }) => {
+const SiteSelector: React.FC<SiteSelectorProps> = ({ sites, currentUrl, theme, onSelect, onRandomSelect }) => {
   return (
     <div className="flex items-center gap-1.5 overflow-x-auto no-scrollbar">
       {sites.map((site) => {
@@ -30,6 +31,17 @@ const SiteSelector: React.FC<SiteSelectorProps> = ({ sites, currentUrl, theme, o
           </button>
         );
       })}
+      {/* Random Site Button */}
+      <button
+        onClick={onRandomSelect}
+        className={`h-8 px-3 rounded-md text-[10px] font-bold tracking-tight transition-all shrink-0 whitespace-nowrap border flex items-center justify-center box-border
+          ${theme === 'dark'
+            ? 'bg-orange-600/20 border-orange-500/50 text-orange-400 hover:text-orange-300 hover:bg-orange-600/30 shadow-md'
+            : 'bg-orange-100 border-orange-200 text-orange-600 hover:text-orange-700 hover:bg-orange-200 shadow-sm'
+          }`}
+      >
+        Random
+      </button>
     </div>
   );
 };
