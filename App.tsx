@@ -131,7 +131,7 @@ const App: React.FC = () => {
         </div>
         <div className="flex items-center gap-2">
           <div className={`w-1 h-1 rounded-full ${theme === 'dark' ? 'bg-emerald-500/50' : 'bg-emerald-500'}`}></div>
-          <span className="opacity-50">Archive Sync Online</span>
+          {/* <span className="opacity-50">Archive Sync Online</span> */}
         </div>
       </footer>
     </div>
