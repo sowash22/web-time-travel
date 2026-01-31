@@ -101,7 +101,7 @@ const BrowserWindow: React.FC<BrowserWindowProps> = ({ url, year, iframeUrl, loa
                   {currentMessage}
                 </div>
                 <div className={`text-[9px] mt-6 font-mono font-bold uppercase tracking-[0.3em] ${theme === 'dark' ? 'text-gray-600' : 'text-slate-400'}`}>
-                  Accessing {year}
+                  Time traveling to {year}
                 </div>
               </div>
             </div>

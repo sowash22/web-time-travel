@@ -74,7 +74,7 @@ const App: React.FC = () => {
               <h1 className={`text-xl font-black tracking-tight leading-none ${theme === 'dark' ? 'text-white' : 'text-slate-900'}`}>
                 Web Time <span className="text-violet-600">Machine</span>
               </h1>
-              <p className={`text-[9px] font-bold uppercase tracking-[0.2em] ${theme === 'dark' ? 'text-gray-600' : 'text-slate-400'}`}>
+              <p className={`text-[11px] font-bold uppercase tracking-[0.2em] ${theme === 'dark' ? 'text-gray-300' : 'text-slate-600'}`}>
                 travel back in time and explore the web
               </p>
             </div>

@@ -51,10 +51,10 @@ const Timeline: React.FC<TimelineProps> = ({ min, max, value, theme, onChange })
                 className="absolute flex items-center justify-center h-full"
                 style={{ left: `${pos}%`, transform }}
               >
-                <span className={`px-1 text-[9px] font-black mono tracking-tighter z-10 transition-colors ${
+                <span className={`px-1 text-[11px] font-black font-mono tracking-tighter z-10 transition-colors ${
                   theme === 'dark' 
-                    ? 'text-gray-500 bg-[#0f172a]' 
-                    : 'text-slate-400 bg-white'
+                    ? 'text-neutral-300 bg-[#0f172a]' 
+                    : 'text-neutral-900 bg-white'
                 }`}>
                   {m}
                 </span>
