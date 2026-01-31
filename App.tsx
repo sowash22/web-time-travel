@@ -9,8 +9,26 @@ import SearchBar from './components/SearchBar';
 import ThemeToggle from './components/ThemeToggle';
 
 const App: React.FC = () => {
-  const [year, setYear] = useState<number>(1999);
-  const [url, setUrl] = useState<string>('google.com');
+  const [year, setYear] = useState<number>(() => {
+    if (typeof window !== 'undefined') {
+      const params = new URLSearchParams(window.location.search);
+      const yearParam = parseInt(params.get('year') || '', 10);
+      if (!isNaN(yearParam) && yearParam >= MIN_YEAR && yearParam <= MAX_YEAR) {
+        return yearParam;
+      }
+    }
+    return 1999;
+  });
+  const [url, setUrl] = useState<string>(() => {
+    if (typeof window !== 'undefined') {
+      const params = new URLSearchParams(window.location.search);
+      const urlParam = params.get('site');
+      if (urlParam && urlParam.trim() !== '') {
+        return urlParam;
+      }
+    }
+    return 'google.com';
+  });
   const [iframeUrl, setIframeUrl] = useState<string>('');
   const [loading, setLoading] = useState<boolean>(false);
   const [theme, setTheme] = useState<'light' | 'dark'>(() => {
@@ -21,8 +39,8 @@ const App: React.FC = () => {
   });
 
   useEffect(() => {
-    updateView('google.com', 1999);
-  }, []);
+    updateView(url, year);
+  }, []); // Run once on mount to set the initial iframeUrl
 
   useEffect(() => {
     const root = window.document.documentElement;
@@ -39,6 +57,15 @@ const App: React.FC = () => {
     const validated = validateUrl(newUrl);
     setUrl(validated);
     setYear(newYear);
+
+    // Update URL query parameters
+    const params = new URLSearchParams(window.location.search);
+    if (params.get('site') !== validated || params.get('year') !== String(newYear)) {
+      params.set('site', validated);
+      params.set('year', String(newYear));
+      const newUrlString = `${window.location.pathname}?${params.toString()}`;
+      window.history.replaceState({}, '', newUrlString);
+    }
     
     setTimeout(() => {
       setIframeUrl(getWaybackUrl(validated, newYear));
