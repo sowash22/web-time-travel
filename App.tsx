@@ -82,8 +82,9 @@ const App: React.FC = () => {
           </div>
 
           {/* LEVEL 2: Site Selectors & Address Bar - Tightened py */}
-          <div className="flex items-center gap-4 py-1">
-            <div className="flex-1 overflow-hidden flex items-center">
+          <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4 py-1">
+            {/* Site Selector - Full width on mobile, flex-1 on desktop */}
+            <div className="w-full sm:flex-1 overflow-hidden flex items-center">
               <SiteSelector 
                 sites={POPULAR_SITES} 
                 currentUrl={url} 
@@ -92,9 +93,11 @@ const App: React.FC = () => {
               />
             </div>
 
-            <div className={`h-4 w-px shrink-0 ${theme === 'dark' ? 'bg-white/10' : 'bg-slate-200'}`}></div>
+            {/* Divider - Hidden on mobile, shown on desktop */}
+            <div className={`hidden sm:block h-4 w-px shrink-0 ${theme === 'dark' ? 'bg-white/10' : 'bg-slate-200'}`}></div>
 
-            <div className="w-[340px] shrink-0 flex items-center">
+            {/* Search Bar - Full width on mobile, fixed width on desktop */}
+            <div className="w-full sm:w-[340px] shrink-0 flex items-center">
               <SearchBar onSearch={handleSearch} initialValue={url} theme={theme} />
             </div>
           </div>

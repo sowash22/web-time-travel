@@ -1,5 +1,4 @@
-
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 
 interface SearchBarProps {
   onSearch: (url: string) => void;
@@ -9,6 +8,8 @@ interface SearchBarProps {
 
 const SearchBar: React.FC<SearchBarProps> = ({ onSearch, initialValue, theme }) => {
   const [inputValue, setInputValue] = useState(initialValue);
+  const [isFocused, setIsFocused] = useState(false);
+  const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     setInputValue(initialValue);
@@ -21,18 +22,49 @@ const SearchBar: React.FC<SearchBarProps> = ({ onSearch, initialValue, theme }) 
     }
   };
 
+  const handleFocus = () => {
+    setIsFocused(true);
+  };
+
+  const handleBlur = () => {
+    setIsFocused(false);
+  };
+
+  const placeholder = isFocused 
+    ? "Type any URL..." 
+    : `${initialValue || 'Enter custom URL...'}`;
+
   return (
     <form onSubmit={handleSubmit} className="w-full h-8 flex items-center">
       <div className="relative flex items-center h-full w-full translate-y-[1px]">
+        {/* Overlay text showing current site when not focused */}
+        {!isFocused && inputValue && (
+          <div 
+            className={`absolute left-3 right-12 pointer-events-none flex items-center h-full text-xs font-mono tracking-tight ${
+              theme === 'dark' ? 'text-gray-200' : 'text-slate-800'
+            }`}
+          >
+            <span className="truncate font-medium">{inputValue}</span>
+            <span className={`ml-2 text-[10px] font-bold ${
+              theme === 'dark' ? 'text-gray-500' : 'text-slate-400'
+            }`}>
+               click to change
+            </span>
+          </div>
+        )}
+
         <input
+          ref={inputRef}
           type="text"
-          value={inputValue}
+          value={isFocused ? inputValue : ''}
           onChange={(e) => setInputValue(e.target.value)}
-          placeholder="Enter custom URL..."
+          onFocus={handleFocus}
+          onBlur={handleBlur}
+          placeholder={placeholder}
           className={`w-full h-full px-3 border rounded-lg text-xs transition-all font-mono tracking-tight box-border leading-none focus:outline-none focus:ring-1 focus:ring-violet-500/40 ${
             theme === 'dark' 
-              ? 'bg-white/[0.03] border-white/10 text-gray-200 placeholder-gray-700 focus:bg-white/[0.06]' 
-              : 'bg-white border-slate-200 text-slate-800 placeholder-slate-300 focus:bg-white shadow-sm'
+              ? 'bg-white/[0.03] border-white/10 text-gray-200 placeholder-gray-500 focus:bg-white/[0.06]' 
+              : 'bg-white border-slate-200 text-slate-800 placeholder-slate-400 focus:bg-white shadow-sm'
           }`}
         />
         <button 
