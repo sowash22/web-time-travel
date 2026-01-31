@@ -14,4 +14,5 @@ export const POPULAR_SITES: PopularSite[] = [
   { id: 'netflix', name: 'Netflix', url: 'netflix.com', icon: '🍿', startYear: 1997 },
   { id: 'yahoo', name: 'Yahoo', url: 'yahoo.com', icon: '🟣', startYear: 1995 },
   { id: 'wikipedia', name: 'Wikipedia', url: 'wikipedia.org', icon: '🌐', startYear: 2001 },
+  { id: 'ebay', name: 'eBay', url: 'ebay.com', icon: '💰', startYear: 1995 },
 ];
