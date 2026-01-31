@@ -40,7 +40,7 @@ const SiteSelector: React.FC<SiteSelectorProps> = ({ sites, currentUrl, theme, o
             : 'bg-white border-slate-200 text-slate-500 hover:text-slate-900 hover:bg-slate-50 shadow-sm'
           }`}
       >
-        Surprises Me
+        Surprise Me
       </button>
     </div>
   );
