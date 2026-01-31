@@ -143,7 +143,7 @@ const App: React.FC = () => {
           </div>
 
           {/* LEVEL 3: Timeline Navigation - Tightened py */}
-          <div className="py-1">
+          <div className="py-1 mb-2">
             <Timeline 
               min={MIN_YEAR} 
               max={MAX_YEAR} 
