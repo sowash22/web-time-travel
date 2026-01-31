@@ -75,7 +75,7 @@ const Timeline: React.FC<TimelineProps> = ({ min, max, value, theme, onChange })
         
         {/* Active Marker Floating Indicator */}
         <div 
-          className="absolute top-[24px] pointer-events-none transition-all duration-75 z-30"
+          className="absolute top-[30px] pointer-events-none transition-all duration-75 z-30"
           style={{ 
             left: leftPos,
             transform: 'translateX(-50%)'

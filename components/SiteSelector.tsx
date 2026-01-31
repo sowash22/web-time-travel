@@ -18,7 +18,7 @@ const SiteSelector: React.FC<SiteSelectorProps> = ({ sites, currentUrl, theme, o
         const activeClasses = isActive 
           ? 'bg-violet-600 border-violet-500 text-white shadow-md' 
           : theme === 'dark'
-            ? 'bg-white/[0.02] border-white/5 text-gray-500 hover:text-gray-200 hover:bg-white/5'
+            ? 'bg-white/[0.02] border-white/20 text-gray-300 hover:text-white hover:bg-white/10 hover:shadow-md'
             : 'bg-white border-slate-200 text-slate-500 hover:text-slate-900 hover:bg-slate-50 shadow-sm';
 
         return (
@@ -34,13 +34,13 @@ const SiteSelector: React.FC<SiteSelectorProps> = ({ sites, currentUrl, theme, o
       {/* Random Site Button */}
       <button
         onClick={onRandomSelect}
-        className={`h-8 px-3 rounded-md text-[10px] font-bold tracking-tight transition-all shrink-0 whitespace-nowrap border flex items-center justify-center box-border
+        className={`h-8 px-3 rounded-md text-[10px] font-bold tracking-tight transition-all shrink-0 whitespace-nowrap border flex items-center justify-center gap-1 box-border
           ${theme === 'dark'
-            ? 'bg-orange-600/20 border-orange-500/50 text-orange-400 hover:text-orange-300 hover:bg-orange-600/30 shadow-md'
-            : 'bg-orange-100 border-orange-200 text-orange-600 hover:text-orange-700 hover:bg-orange-200 shadow-sm'
+            ? 'bg-white/[0.02] border-white/20 text-gray-300 hover:text-white hover:bg-white/10 hover:shadow-md'
+            : 'bg-white border-slate-200 text-slate-500 hover:text-slate-900 hover:bg-slate-50 shadow-sm'
           }`}
       >
-        Random
+        Surprises Me
       </button>
     </div>
   );
