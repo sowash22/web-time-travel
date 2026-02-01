@@ -179,7 +179,7 @@ const App: React.FC = () => {
           </div>
           <div className="py-1 mb-0">
             <p className={`text-xs font-bold uppercase tracking-[0.2em] mb-1 px-1 ${theme === 'dark' ? 'text-violet-200' : 'text-violet-600'}`}>
-              {loading ? 'Step 3. HANG TIGHT...' : 'Step 3. WE\'VE ARRIVED AT YOUR DESTINATION'}
+              {loading ? 'Step 3. HANG TIGHT...' : 'Step 3. WE\'VE ARRIVED!'}
             </p>
           </div>
         </div>
