@@ -24,7 +24,7 @@ const SiteSelector: React.FC<SiteSelectorProps> = ({ sites, currentUrl, theme, o
         return (
           <button
             onClick={onRandomSelect}
-            className={`order-first sm:order-last h-8 px-3 rounded-md text-[10px] font-bold tracking-tight transition-all shrink-0 whitespace-nowrap border flex items-center justify-center gap-1 box-border ${surpriseMeClasses}`}
+            className={`order-first h-8 px-3 rounded-md text-[10px] font-bold tracking-tight transition-all shrink-0 whitespace-nowrap border flex items-center justify-center gap-1 box-border ${surpriseMeClasses}`}
           >
             Surprise Me
           </button>
