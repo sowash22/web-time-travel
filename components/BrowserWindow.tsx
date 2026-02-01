@@ -66,6 +66,23 @@ const LOADING_MESSAGES = [
 const BrowserWindow: React.FC<BrowserWindowProps> = ({ url, year, iframeUrl, loading, theme, onLoadComplete }) => {
   const [key, setKey] = useState(0);
   const [currentMessage, setCurrentMessage] = useState(LOADING_MESSAGES[0]);
+  const [zoomLevel, setZoomLevel] = useState(1);
+
+  const handleZoomIn = () => setZoomLevel(prev => Math.min(prev + 0.1, 2));
+  const handleZoomOut = () => setZoomLevel(prev => Math.max(prev - 0.1, 0.2));
+  const handleZoomReset = () => {
+    if (window.innerWidth < 768) {
+      setZoomLevel(1);
+    } else {
+      setZoomLevel(1);
+    }
+  };
+
+  useEffect(() => {
+    if (window.innerWidth < 768) {
+      setZoomLevel(0.6);
+    }
+  }, []);
 
   useEffect(() => {
     setKey(prev => prev + 1);
@@ -109,6 +126,19 @@ const BrowserWindow: React.FC<BrowserWindowProps> = ({ url, year, iframeUrl, loa
             </span>
           </div>
 
+          {/* Zoom Controls */}
+          <div className="flex items-center gap-1">
+            <button onClick={handleZoomOut} className={`p-1 rounded-md ${theme === 'dark' ? 'hover:bg-white/10' : 'hover:bg-slate-200'}`}>
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={`${theme === 'dark' ? 'text-gray-400' : 'text-slate-500'}`}><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="8" y1="11" x2="14" y2="11"/></svg>
+            </button>
+            <button onClick={handleZoomReset} className={`p-1 rounded-md ${theme === 'dark' ? 'hover:bg-white/10' : 'hover:bg-slate-200'}`}>
+               <span className={`text-xs font-bold ${theme === 'dark' ? 'text-gray-400' : 'text-slate-500'}`}>{Math.round(zoomLevel * 100)}%</span>
+            </button>
+            <button onClick={handleZoomIn} className={`p-1 rounded-md ${theme === 'dark' ? 'hover:bg-white/10' : 'hover:bg-slate-200'}`}>
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={`${theme === 'dark' ? 'text-gray-400' : 'text-slate-500'}`}><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg>
+            </button>
+          </div>
+
           {/* Year Info Badge Only */}
           <div className="shrink-0 flex items-center">
             <div className={`flex items-center px-3 py-1 border rounded-md ${theme === 'dark' ? 'bg-violet-500/10 border-violet-500/20' : 'bg-violet-50 border-violet-200 shadow-sm'}`}>
@@ -118,7 +148,7 @@ const BrowserWindow: React.FC<BrowserWindowProps> = ({ url, year, iframeUrl, loa
         </div>
 
         {/* Content Container */}
-        <div className="relative flex-1 bg-white">
+        <div className="relative flex-1 bg-white overflow-x-hidden overflow-y-auto">
           {loading && (
             <div className={`absolute inset-0 z-20 flex flex-col items-center justify-center space-y-6 backdrop-blur-md transition-opacity duration-500 ${theme === 'dark' ? 'bg-[#020617]/95' : 'bg-slate-50/95'}`}>
               <div className="relative">
@@ -142,7 +172,13 @@ const BrowserWindow: React.FC<BrowserWindowProps> = ({ url, year, iframeUrl, loa
             key={key}
             src={iframeUrl}
             onLoad={onLoadComplete}
-            className="w-full h-full border-none bg-white"
+            style={{
+              width: `${100 / zoomLevel}%`,
+              height: `${100 / zoomLevel}%`,
+              transform: `scale(${zoomLevel})`,
+              transformOrigin: 'top left',
+            }}
+            className="border-none bg-white"
             title={`${url} in ${year}`}
             sandbox="allow-forms allow-scripts allow-same-origin"
           />
