@@ -31,6 +31,7 @@ const App: React.FC = () => {
   });
   const [iframeUrl, setIframeUrl] = useState<string>('');
   const [loading, setLoading] = useState<boolean>(false);
+  const [showArrivedMessage, setShowArrivedMessage] = useState(false); // New state for "Arrived" message
   const [theme, setTheme] = useState<'light' | 'dark'>(() => {
     if (typeof window !== 'undefined') {
       return (localStorage.getItem('theme') as 'light' | 'dark') || 'dark';
@@ -41,6 +42,25 @@ const App: React.FC = () => {
   useEffect(() => {
     updateView(url, year);
   }, []); // Run once on mount to set the initial iframeUrl
+
+  useEffect(() => {
+    let arrivedMessageTimeout: number | undefined;
+
+    if (loading) {
+      setShowArrivedMessage(false); // Hide "arrived" message when loading starts
+    } else {
+      // If not loading, and iframeUrl is present, show "arrived" message briefly
+      if (iframeUrl) {
+        setShowArrivedMessage(true);
+        arrivedMessageTimeout = window.setTimeout(() => {
+          setShowArrivedMessage(false);
+        }, 3000); // Show for 3 seconds
+      }
+    }
+    return () => {
+      if (arrivedMessageTimeout) clearTimeout(arrivedMessageTimeout);
+    };
+  }, [loading, iframeUrl]); // Watch loading and iframeUrl changes
 
   useEffect(() => {
     const root = window.document.documentElement;
@@ -108,7 +128,7 @@ const App: React.FC = () => {
         <div className="max-w-[1600px] mx-auto px-6">
           
           {/* LEVEL 1: Branding & Theme Toggle - Tightened py */}
-          <div className="py-2 flex items-center justify-between">
+          <div className="py-4 flex items-center justify-between">
             <div className="flex items-baseline gap-4">
               <h1 className={`text-xl font-black tracking-tight leading-none ${theme === 'dark' ? 'text-white' : 'text-slate-900'}`}>
                 Web Time <span className="text-violet-600">Machine</span>
@@ -121,29 +141,40 @@ const App: React.FC = () => {
           </div>
 
           {/* LEVEL 2: Site Selectors & Address Bar - Tightened py */}
-          <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4 py-1">
-            {/* Site Selector - Full width on mobile, flex-1 on desktop */}
-            <div className="w-full sm:flex-1 overflow-hidden flex items-center">
-              <SiteSelector 
-                sites={POPULAR_SITES} 
-                currentUrl={url} 
-                onSelect={handleSiteSelect}
-                onRandomSelect={handleRandomSite} // Pass the new handler
-                theme={theme}
-              />
-            </div>
+          <div className="flex flex-col gap-2 py-2"> {/* New container for the entire section */}
+            <p className={`text-sm font-bold uppercase tracking-[0.2em] px-1 ${theme === 'dark' ? 'text-violet-400' : 'text-violet-600'}`}>
+              Step 1. PICK YOUR DESTINATION
+            </p>
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4"> {/* Original LEVEL 2 flex container, now nested */}
+              {/* Site Selector - Full width on mobile, flex-1 on desktop */}
+              <div className="w-full sm:flex-1 overflow-hidden flex flex-col">
+                {/* <p className={`text-[9px] font-bold uppercase tracking-[0.2em] mb-1 px-1 ${theme === 'dark' ? 'text-gray-400' : 'text-slate-500'}`}>
+                  POPULAR DESTINATIONS
+                </p> */}
+                <SiteSelector 
+                  sites={POPULAR_SITES} 
+                  currentUrl={url} 
+                  onSelect={handleSiteSelect}
+                  onRandomSelect={handleRandomSite} // Pass the new handler
+                  theme={theme}
+                />
+              </div>
 
-            {/* Divider - Hidden on mobile, shown on desktop */}
-            <div className={`hidden sm:block h-4 w-px shrink-0 ${theme === 'dark' ? 'bg-white/10' : 'bg-slate-200'}`}></div>
+              {/* Divider - Hidden on mobile, shown on desktop */}
+              <div className={`hidden sm:block h-4 w-px shrink-0 ${theme === 'dark' ? 'bg-white/10' : 'bg-slate-200'}`}></div>
 
-            {/* Search Bar - Full width on mobile, fixed width on desktop */}
-            <div className="w-full sm:w-[340px] shrink-0 flex items-center">
-              <SearchBar onSearch={handleSearch} initialValue={url} theme={theme} />
+              {/* Search Bar - Full width on mobile, fixed width on desktop */}
+              <div className="w-full sm:w-[340px] shrink-0 flex items-center">
+                <SearchBar onSearch={handleSearch} initialValue={url} theme={theme} />
+              </div>
             </div>
           </div>
 
           {/* LEVEL 3: Timeline Navigation - Tightened py */}
-          <div className="py-1 mb-2">
+          <div className="py-1 mb-2 mt-2">
+            <p className={`text-sm font-bold uppercase tracking-[0.2em] mb-1 px-1 ${theme === 'dark' ? 'text-violet-400' : 'text-violet-600'}`}>
+              Step 2. Select the year
+            </p>
             <Timeline 
               min={MIN_YEAR} 
               max={MAX_YEAR} 
@@ -152,19 +183,24 @@ const App: React.FC = () => {
               theme={theme}
             />
           </div>
+          <div className="py-1 mb-2">
+            <p className={`text-sm font-bold uppercase tracking-[0.2em] mb-1 px-1 ${theme === 'dark' ? 'text-violet-400' : 'text-violet-600'}`}>
+              {loading ? 'Step 3. HANG TIGHT!' : 'Step 3. WE\'VE ARRIVED!'}
+            </p>
+          </div>
         </div>
       </header>
 
       {/* Primary Viewport */}
-      <main className="flex-1 relative flex flex-col bg-black">
-        <BrowserWindow 
-          url={url} 
-          year={year} 
-          iframeUrl={iframeUrl} 
-          loading={loading}
-          theme={theme}
-          onLoadComplete={() => setLoading(false)}
-        />
+      <main className="flex-1 relative flex flex-col bg-black p-4">
+          <BrowserWindow 
+            url={url} 
+            year={year} 
+            iframeUrl={iframeUrl} 
+            loading={loading}
+            theme={theme}
+            onLoadComplete={() => setLoading(false)}
+          />
       </main>
 
       {/* Compact Footer - Tightened h */}
