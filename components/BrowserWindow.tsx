@@ -132,7 +132,7 @@ const BrowserWindow: React.FC<BrowserWindowProps> = ({ url, year, iframeUrl, loa
               <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={`${theme === 'dark' ? 'text-gray-400' : 'text-slate-500'}`}><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="8" y1="11" x2="14" y2="11"/></svg>
             </button>
             <button onClick={handleZoomReset} className={`p-1 rounded-md ${theme === 'dark' ? 'hover:bg-white/10' : 'hover:bg-slate-200'}`}>
-               <span className={`text-xs font-bold ${theme === 'dark' ? 'text-gray-400' : 'text-slate-500'}`}>{Math.round(zoomLevel * 100)}%</span>
+               <span className={`text-sm font-bold ${theme === 'dark' ? 'text-gray-400' : 'text-slate-500'}`}>{Math.round(zoomLevel * 100)}%</span>
             </button>
             <button onClick={handleZoomIn} className={`p-1 rounded-md ${theme === 'dark' ? 'hover:bg-white/10' : 'hover:bg-slate-200'}`}>
               <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={`${theme === 'dark' ? 'text-gray-400' : 'text-slate-500'}`}><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg>
@@ -142,7 +142,7 @@ const BrowserWindow: React.FC<BrowserWindowProps> = ({ url, year, iframeUrl, loa
           {/* Year Info Badge Only */}
           <div className="shrink-0 flex items-center">
             <div className={`flex items-center px-3 py-1 border rounded-md ${theme === 'dark' ? 'bg-violet-500/10 border-violet-500/20' : 'bg-violet-50 border-violet-200 shadow-sm'}`}>
-              <span className={`text-[11px] font-black font-mono leading-none ${theme === 'dark' ? 'text-violet-400' : 'text-violet-600'}`}>{year}</span>
+              <span className={`text-sm font-black font-mono leading-none ${theme === 'dark' ? 'text-violet-400' : 'text-violet-600'}`}>{year}</span>
             </div>
           </div>
         </div>
