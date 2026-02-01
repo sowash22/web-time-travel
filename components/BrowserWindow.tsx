@@ -1,5 +1,4 @@
-
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 
 interface BrowserWindowProps {
   url: string;
@@ -79,6 +78,8 @@ const BrowserWindow: React.FC<BrowserWindowProps> = ({ url, year, iframeUrl, loa
   const [key, setKey] = useState(0);
   const [currentMessage, setCurrentMessage] = useState(LOADING_MESSAGES[0]);
   const [zoomLevel, setZoomLevel] = useState(1);
+  const [isYearDropdownOpen, setIsYearDropdownOpen] = useState(false);
+  const yearDropdownRef = useRef<HTMLDivElement>(null);
 
   const handleZoomIn = () => setZoomLevel(prev => Math.min(prev + 0.1, 2));
   const handleZoomOut = () => setZoomLevel(prev => Math.max(prev - 0.1, 0.2));
@@ -87,6 +88,25 @@ const BrowserWindow: React.FC<BrowserWindowProps> = ({ url, year, iframeUrl, loa
   useEffect(() => {
     setKey(prev => prev + 1);
   }, [iframeUrl]);
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (yearDropdownRef.current && !yearDropdownRef.current.contains(event.target as Node)) {
+        setIsYearDropdownOpen(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
+
+  const handleYearSelect = (newYear: number) => {
+    onYearChange(newYear);
+    setIsYearDropdownOpen(false);
+  };
+
+  const years = Array.from({ length: maxYear - minYear + 1 }, (_, i) => maxYear - i);
 
   useEffect(() => {
     let interval: number;
@@ -140,7 +160,7 @@ const BrowserWindow: React.FC<BrowserWindowProps> = ({ url, year, iframeUrl, loa
           </div>
 
           {/* Year Navigator */}
-          <div className="shrink-0 flex items-center gap-1">
+          <div className="shrink-0 flex items-center gap-1 relative" ref={yearDropdownRef}>
             <button 
               onClick={() => onYearChange(year - 1)} 
               disabled={year <= minYear}
@@ -148,7 +168,31 @@ const BrowserWindow: React.FC<BrowserWindowProps> = ({ url, year, iframeUrl, loa
             >
               <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={`${theme === 'dark' ? 'text-gray-400' : 'text-slate-500'}`}><path d="m15 18-6-6 6-6"/></svg>
             </button>
-            <span className={`p-1 rounded-md text-xs font-black font-mono leading-none ${theme === 'dark' ? 'text-violet-400 hover:bg-white/10' : 'text-violet-600 hover:bg-slate-200'}`}>{year}</span>
+            <span
+              onClick={() => setIsYearDropdownOpen(!isYearDropdownOpen)}
+              className={`p-1 rounded-md text-xs font-black font-mono leading-none cursor-pointer ${theme === 'dark' ? 'text-violet-400 hover:bg-white/10' : 'text-violet-600 hover:bg-slate-200'}`}
+            >
+              {year}
+            </span>
+            {isYearDropdownOpen && (
+              <div className={`absolute z-30 top-full mt-2 left-1/2 -translate-x-1/2 w-fit max-h-60 overflow-y-auto rounded-md shadow-lg border ${theme === 'dark' ? 'bg-[#0f172a] border-white/10' : 'bg-white border-slate-200'}`}>
+                <ul className="py-1">
+                  {years.map(y => (
+                    <li
+                      key={y}
+                      onClick={() => handleYearSelect(y)}
+                      className={`px-3 py-1.5 text-xs text-center cursor-pointer ${
+                        y === year
+                          ? (theme === 'dark' ? 'bg-violet-500/20 text-white' : 'bg-violet-100 text-violet-700')
+                          : (theme === 'dark' ? 'text-gray-300 hover:bg-white/5' : 'text-slate-700 hover:bg-slate-100')
+                      }`}
+                    >
+                      {y}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
             <button 
               onClick={() => onYearChange(year + 1)} 
               disabled={year >= maxYear}
