@@ -78,9 +78,10 @@ const BrowserWindow: React.FC<BrowserWindowProps> = ({ url, year, iframeUrl, loa
     }
   };
 
+  // Reset zoom level to 100% on mobile
   useEffect(() => {
     if (window.innerWidth < 768) {
-      setZoomLevel(0.6);
+      setZoomLevel(1);
     }
   }, []);
 
