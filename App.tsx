@@ -148,9 +148,6 @@ const App: React.FC = () => {
             <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4"> {/* Original LEVEL 2 flex container, now nested */}
               {/* Site Selector - Full width on mobile, flex-1 on desktop */}
               <div className="w-full sm:flex-1 overflow-hidden flex flex-col">
-                {/* <p className={`text-[9px] font-bold uppercase tracking-[0.2em] mb-1 px-1 ${theme === 'dark' ? 'text-gray-400' : 'text-slate-500'}`}>
-                  POPULAR DESTINATIONS
-                </p> */}
                 <SiteSelector 
                   sites={POPULAR_SITES} 
                   currentUrl={url} 
@@ -159,10 +156,7 @@ const App: React.FC = () => {
                   theme={theme}
                 />
               </div>
-
-              {/* Divider - Hidden on mobile, shown on desktop */}
-              <div className={`hidden sm:block h-4 w-px shrink-0 ${theme === 'dark' ? 'bg-white/10' : 'bg-slate-200'}`}></div>
-
+              <span className="text-xs tracking-[0.2em] px-1 ${theme === 'dark' ? 'text-violet-200' : 'text-violet-600'}">or enter your destination</span>
               {/* Search Bar - Full width on mobile, fixed width on desktop */}
               <div className="w-full sm:w-[340px] shrink-0 flex items-center">
                 <SearchBar onSearch={handleSearch} initialValue={url} theme={theme} />
@@ -193,7 +187,7 @@ const App: React.FC = () => {
 
       {/* Primary Viewport */}
       <main className="flex-1 relative flex flex-col bg-black">
-        <div className="max-w-[1600px] mx-auto px-6 w-full flex-1 flex flex-col"> {/* Added wrapper div */}
+        <div className="max-w-[1600px] mx-auto px-4 w-full flex-1 flex flex-col"> {/* Added wrapper div */}
           <BrowserWindow
             url={url}
             year={year}
