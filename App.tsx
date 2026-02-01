@@ -195,6 +195,9 @@ const App: React.FC = () => {
             loading={loading}
             theme={theme}
             onLoadComplete={() => setLoading(false)}
+            onYearChange={handleYearChange}
+            minYear={MIN_YEAR}
+            maxYear={MAX_YEAR}
           />
         </div>
       </main>
