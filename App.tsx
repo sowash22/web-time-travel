@@ -141,8 +141,8 @@ const App: React.FC = () => {
           </div>
 
           {/* LEVEL 2: Site Selectors & Address Bar - Tightened py */}
-          <div className="flex flex-col gap-2 py-2"> {/* New container for the entire section */}
-            <p className={`text-sm font-bold uppercase tracking-[0.2em] px-1 ${theme === 'dark' ? 'text-violet-400' : 'text-violet-600'}`}>
+          <div className="flex flex-col gap-3 py-2"> {/* New container for the entire section */}
+            <p className={`text-sm font-bold uppercase tracking-[0.2em] px-1 ${theme === 'dark' ? 'text-violet-200' : 'text-violet-600'}`}>
               Step 1. PICK YOUR DESTINATION
             </p>
             <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4"> {/* Original LEVEL 2 flex container, now nested */}
@@ -171,8 +171,8 @@ const App: React.FC = () => {
           </div>
 
           {/* LEVEL 3: Timeline Navigation - Tightened py */}
-          <div className="py-1 mb-2 mt-2">
-            <p className={`text-sm font-bold uppercase tracking-[0.2em] mb-1 px-1 ${theme === 'dark' ? 'text-violet-400' : 'text-violet-600'}`}>
+          <div className="flex flex-col gap-1 py-2">
+            <p className={`text-sm font-bold uppercase tracking-[0.2em] px-1 ${theme === 'dark' ? 'text-violet-200' : 'text-violet-600'}`}>
               Step 2. Select the year
             </p>
             <Timeline 
@@ -183,24 +183,26 @@ const App: React.FC = () => {
               theme={theme}
             />
           </div>
-          <div className="py-1 mb-2">
-            <p className={`text-sm font-bold uppercase tracking-[0.2em] mb-1 px-1 ${theme === 'dark' ? 'text-violet-400' : 'text-violet-600'}`}>
-              {loading ? 'Step 3. HANG TIGHT!' : 'Step 3. WE\'VE ARRIVED!'}
+          <div className="py-1 mb-0">
+            <p className={`text-sm font-bold uppercase tracking-[0.2em] mb-1 px-1 ${theme === 'dark' ? 'text-violet-200' : 'text-violet-600'}`}>
+              {loading ? 'Step 3. HANG TIGHT...' : 'Step 3. WE\'VE ARRIVED!'}
             </p>
           </div>
         </div>
       </header>
 
       {/* Primary Viewport */}
-      <main className="flex-1 relative flex flex-col bg-black p-4">
-          <BrowserWindow 
-            url={url} 
-            year={year} 
-            iframeUrl={iframeUrl} 
+      <main className="flex-1 relative flex flex-col bg-black">
+        <div className="max-w-[1600px] mx-auto px-6 w-full flex-1 flex flex-col"> {/* Added wrapper div */}
+          <BrowserWindow
+            url={url}
+            year={year}
+            iframeUrl={iframeUrl}
             loading={loading}
             theme={theme}
             onLoadComplete={() => setLoading(false)}
           />
+        </div>
       </main>
 
       {/* Compact Footer - Tightened h */}
