@@ -156,7 +156,7 @@ const App: React.FC = () => {
                   theme={theme}
                 />
               </div>
-              <span className={`text-xs tracking-[0.2em] px-1 ${theme === 'dark' ? 'text-violet-200' : 'text-violet-600'}`}>or enter your destination</span>
+              <span className={`text-xs tracking-[0.2em] px-1 ${theme === 'dark' ? 'text-violet-200' : 'text-violet-600'}`}>or enter manually</span>
               {/* Search Bar - Full width on mobile, fixed width on desktop */}
               <div className="w-full sm:w-[340px] shrink-0 flex items-center">
                 <SearchBar onSearch={handleSearch} initialValue={url} theme={theme} />
