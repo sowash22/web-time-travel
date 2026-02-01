@@ -142,7 +142,7 @@ const App: React.FC = () => {
 
           {/* LEVEL 2: Site Selectors & Address Bar - Tightened py */}
           <div className="flex flex-col gap-3 py-2"> {/* New container for the entire section */}
-            <p className={`text-sm font-bold uppercase tracking-[0.2em] px-1 ${theme === 'dark' ? 'text-violet-200' : 'text-violet-600'}`}>
+            <p className={`text-xs font-bold uppercase tracking-[0.2em] px-1 ${theme === 'dark' ? 'text-violet-200' : 'text-violet-600'}`}>
               Step 1. PICK YOUR DESTINATION
             </p>
             <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4"> {/* Original LEVEL 2 flex container, now nested */}
@@ -156,7 +156,7 @@ const App: React.FC = () => {
                   theme={theme}
                 />
               </div>
-              <span className="text-xs tracking-[0.2em] px-1 ${theme === 'dark' ? 'text-violet-200' : 'text-violet-600'}">or enter your destination</span>
+              <span className={`text-xs tracking-[0.2em] px-1 ${theme === 'dark' ? 'text-violet-200' : 'text-violet-600'}`}>or enter your destination</span>
               {/* Search Bar - Full width on mobile, fixed width on desktop */}
               <div className="w-full sm:w-[340px] shrink-0 flex items-center">
                 <SearchBar onSearch={handleSearch} initialValue={url} theme={theme} />
@@ -166,7 +166,7 @@ const App: React.FC = () => {
 
           {/* LEVEL 3: Timeline Navigation - Tightened py */}
           <div className="flex flex-col gap-1 py-2">
-            <p className={`text-sm font-bold uppercase tracking-[0.2em] px-1 ${theme === 'dark' ? 'text-violet-200' : 'text-violet-600'}`}>
+            <p className={`text-xs font-bold uppercase tracking-[0.2em] px-1 ${theme === 'dark' ? 'text-violet-200' : 'text-violet-600'}`}>
               Step 2. Select the year
             </p>
             <Timeline 
@@ -178,8 +178,8 @@ const App: React.FC = () => {
             />
           </div>
           <div className="py-1 mb-0">
-            <p className={`text-sm font-bold uppercase tracking-[0.2em] mb-1 px-1 ${theme === 'dark' ? 'text-violet-200' : 'text-violet-600'}`}>
-              {loading ? 'Step 3. HANG TIGHT...' : 'Step 3. WE\'VE ARRIVED!'}
+            <p className={`text-xs font-bold uppercase tracking-[0.2em] mb-1 px-1 ${theme === 'dark' ? 'text-violet-200' : 'text-violet-600'}`}>
+              {loading ? 'Step 3. HANG TIGHT...' : 'Step 3. WE\'VE ARRIVED AT YOUR DESTINATION'}
             </p>
           </div>
         </div>
@@ -187,7 +187,7 @@ const App: React.FC = () => {
 
       {/* Primary Viewport */}
       <main className="flex-1 relative flex flex-col bg-black">
-        <div className="max-w-[1600px] mx-auto px-4 w-full flex-1 flex flex-col"> {/* Added wrapper div */}
+        <div className="max-w-[1600px] mx-auto px-0 w-full flex-1 flex flex-col"> {/* Added wrapper div */}
           <BrowserWindow
             url={url}
             year={year}

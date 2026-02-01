@@ -40,13 +40,13 @@ const SearchBar: React.FC<SearchBarProps> = ({ onSearch, initialValue, theme }) 
         {/* Overlay text showing current site when not focused */}
         {!isFocused && inputValue && (
           <div 
-            className={`absolute left-3 right-12 pointer-events-none flex items-center h-full text-xs font-mono tracking-tight ${
-              theme === 'dark' ? 'text-gray-200' : 'text-slate-800'
+            className={`absolute left-3 right-12 pointer-events-none flex items-center h-full text-xs font-mono font-normal tracking-tight ${
+              theme === 'dark' ? 'text-white' : 'text-black'
             }`}
           >
-            <span className="truncate font-medium">{inputValue}</span>
-            <span className={`ml-2 text-[10px] font-bold ${
-              theme === 'dark' ? 'text-gray-500' : 'text-slate-400'
+            <span className="truncate font-mono">{inputValue}</span>
+            <span className={`ml-2 text-[10px] font-normal ${
+              theme === 'dark' ? 'text-white/[0.5]' : 'text-black/[0.5]'
             }`}>
                click to change
             </span>

@@ -36,7 +36,7 @@ const SiteSelector: React.FC<SiteSelectorProps> = ({ sites, currentUrl, theme, o
           <button
             key={site.id}
             onClick={() => onSelect(site.url, site.startYear)}
-            className={`h-8 px-3 rounded-md text-[10px] font-bold tracking-tight transition-all shrink-0 whitespace-nowrap border flex items-center justify-center box-border ${activeClasses}`}
+            className={`h-8 px-3 rounded-md text-[11px] font-bold tracking-tight transition-all shrink-0 whitespace-nowrap border flex items-center justify-center box-border ${activeClasses}`}
           >
             {site.name}
           </button>
