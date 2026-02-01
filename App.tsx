@@ -125,7 +125,7 @@ const App: React.FC = () => {
     <div className={`flex flex-col h-screen w-full transition-colors duration-300 overflow-hidden font-sans ${theme === 'dark' ? 'bg-[#020617] text-gray-100' : 'bg-slate-50 text-slate-900'}`}>
       {/* Unified Header Control Panel */}
       <header className={`z-20 shrink-0 ${theme === 'dark' ? 'bg-[#0f172a]/60 backdrop-blur-xl' : 'bg-white/80 backdrop-blur-xl shadow-sm'}`}>
-        <div className="max-w-[1600px] mx-auto px-6">
+        <div className="max-w-[1600px] mx-auto px-4">
           
           {/* LEVEL 1: Branding & Theme Toggle - Tightened py */}
           <div className="py-4 flex items-center justify-between">
