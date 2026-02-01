@@ -132,7 +132,7 @@ const BrowserWindow: React.FC<BrowserWindowProps> = ({ url, year, iframeUrl, loa
             <button onClick={handleZoomOut} className={`p-1 rounded-md ${theme === 'dark' ? 'hover:bg-white/10' : 'hover:bg-slate-200'}`}>
               <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={`${theme === 'dark' ? 'text-gray-400' : 'text-slate-500'}`}><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="8" y1="11" x2="14" y2="11"/></svg>
             </button>
-            <button onClick={handleZoomReset} className={`p-1 rounded-md ${theme === 'dark' ? 'hover:bg-white/10' : 'hover:bg-slate-200'}`}>
+            <button onClick={handleZoomReset} className={`p-1 rounded-md flex items-center justify-center ${theme === 'dark' ? 'hover:bg-white/10' : 'hover:bg-slate-200'}`}>
                <span className={`text-sm font-bold ${theme === 'dark' ? 'text-gray-400' : 'text-slate-500'}`}>{Math.round(zoomLevel * 100)}%</span>
             </button>
             <button onClick={handleZoomIn} className={`p-1 rounded-md ${theme === 'dark' ? 'hover:bg-white/10' : 'hover:bg-slate-200'}`}>
