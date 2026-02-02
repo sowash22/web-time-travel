@@ -125,10 +125,10 @@ const App: React.FC = () => {
     <div className={`flex flex-col h-screen w-full transition-colors duration-300 overflow-hidden font-sans ${theme === 'dark' ? 'bg-[#020617] text-gray-100' : 'bg-slate-50 text-slate-900'}`}>
       {/* Unified Header Control Panel */}
       <header className={`z-20 shrink-0 ${theme === 'dark' ? 'bg-[#0f172a]/60 backdrop-blur-xl' : 'bg-white/80 backdrop-blur-xl shadow-sm'}`}>
-        <div className="max-w-[1600px] mx-auto px-4">
+        <div className="max-w-[1600px] mx-auto">
           
           {/* LEVEL 1: Branding & Theme Toggle - Tightened py */}
-          <div className="py-4 flex items-center justify-between">
+          <div className="py-4 px-4 flex items-center justify-between">
             <div className="flex items-baseline gap-4">
               <h1 className={`text-xl font-black tracking-tight leading-none ${theme === 'dark' ? 'text-white' : 'text-slate-900'}`}>
                 Web Time <span className="text-violet-600">Machine</span>
@@ -141,7 +141,7 @@ const App: React.FC = () => {
           </div>
 
           {/* LEVEL 2: Site Selectors & Address Bar - Tightened py */}
-          <div className="flex flex-col gap-3 py-2"> {/* New container for the entire section */}
+          <div className="flex flex-col gap-3 py-2 px-4"> {/* New container for the entire section */}
             <p className={`text-xs font-bold uppercase tracking-[0.2em] px-1 ${theme === 'dark' ? 'text-violet-200' : 'text-violet-600'}`}>
               Step 1. PICK YOUR DESTINATION
             </p>
@@ -165,7 +165,7 @@ const App: React.FC = () => {
           </div>
 
           {/* LEVEL 3: Timeline Navigation - Tightened py */}
-          <div className="flex flex-col gap-1 py-2">
+          <div className="flex flex-col gap-1 py-2 px-4">
             <p className={`text-xs font-bold uppercase tracking-[0.2em] px-1 ${theme === 'dark' ? 'text-violet-200' : 'text-violet-600'}`}>
               Step 2. Select the year
             </p>
@@ -177,7 +177,7 @@ const App: React.FC = () => {
               theme={theme}
             />
           </div>
-          <div className="py-1 mb-0">
+          <div className="py-1 mb-0 px-4">
             <p className={`text-xs font-bold uppercase tracking-[0.2em] mb-1 px-1 ${theme === 'dark' ? 'text-violet-200' : 'text-violet-600'}`}>
               {loading ? 'Step 3. HANG TIGHT...' : 'Step 3. WE\'VE ARRIVED!'}
             </p>
@@ -203,13 +203,15 @@ const App: React.FC = () => {
       </main>
 
       {/* Compact Footer - Tightened h */}
-      <footer className={`shrink-0 h-5 px-6 flex items-center justify-between text-[8px] font-bold tracking-[0.2em] uppercase transition-colors duration-300 ${theme === 'dark' ? 'bg-[#020617] text-gray-700' : 'bg-slate-50 text-slate-400'}`}>
-        <div className="flex items-center gap-4">
-          <span>© {new Date().getFullYear()} <a href="https://me-topaz-two.vercel.app/" target="_blank" rel="noopener noreferrer" className="text-violet-600 hover:underline">Ashok Marannan</a></span>
-        </div>
-        <div className="flex items-center gap-2">
-          <div className={`w-1 h-1 rounded-full ${theme === 'dark' ? 'bg-emerald-500/50' : 'bg-emerald-500'}`}></div>
-          {/* <span className="opacity-50">Archive Sync Online</span> */}
+      <footer className={`shrink-0 h-5 transition-colors duration-300 ${theme === 'dark' ? 'bg-[#020617] text-gray-700' : 'bg-slate-50 text-slate-400'}`}>
+        <div className="max-w-[1600px] mx-auto px-6 w-full h-full flex items-center justify-between text-[8px] font-bold tracking-[0.2em] uppercase">
+          <div className="flex items-center gap-4">
+            <span>© {new Date().getFullYear()} <a href="https://me-topaz-two.vercel.app/" target="_blank" rel="noopener noreferrer" className="text-violet-600 hover:underline">Ashok Marannan</a></span>
+          </div>
+          <div className="flex items-center gap-2">
+            <div className={`w-1 h-1 rounded-full ${theme === 'dark' ? 'bg-emerald-500/50' : 'bg-emerald-500'}`}></div>
+            {/* <span className="opacity-50">Archive Sync Online</span> */}
+          </div>
         </div>
       </footer>
     </div>
