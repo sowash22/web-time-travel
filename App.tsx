@@ -186,7 +186,7 @@ const App: React.FC = () => {
       </header>
 
       {/* Primary Viewport */}
-      <main className="flex-1 relative flex flex-col bg-black">
+      <main className={`flex-1 relative flex flex-col ${theme === 'dark' ? 'bg-[#020617]' : 'bg-slate-50'}`}>
         <div className="max-w-[1600px] mx-auto px-0 w-full flex-1 flex flex-col"> {/* Added wrapper div */}
           <BrowserWindow
             url={url}
