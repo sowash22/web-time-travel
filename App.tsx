@@ -206,7 +206,7 @@ const App: React.FC = () => {
       <footer className={`shrink-0 h-5 transition-colors duration-300 ${theme === 'dark' ? 'bg-[#020617] text-gray-700' : 'bg-slate-50 text-slate-400'}`}>
         <div className="max-w-[1600px] mx-auto px-6 w-full h-full flex items-center justify-between text-[8px] font-bold tracking-[0.2em] uppercase">
           <div className="flex items-center gap-4">
-            <span>© {new Date().getFullYear()} <a href="https://me-topaz-two.vercel.app/" target="_blank" rel="noopener noreferrer" className="text-violet-600 hover:underline">Ashok Marannan</a></span>
+            <span>© {new Date().getFullYear()} <a href="https://ashok-marannan.vercel.app/" target="_blank" rel="noopener noreferrer" className="text-violet-600 hover:underline">Ashok Marannan</a></span>
           </div>
           <div className="flex items-center gap-2">
             <div className={`w-1 h-1 rounded-full ${theme === 'dark' ? 'bg-emerald-500/50' : 'bg-emerald-500'}`}></div>
